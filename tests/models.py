@@ -26,13 +26,11 @@ class Product:
             Проверьте количество продукта используя метод check_quantity
             Если продуктов не хватает, то выбросите исключение ValueError
         """
-        if quantity < 0:
-            raise ValueError("Количество не может быть отрицательным")
-        elif quantity > self.quantity:
-            raise ValueError("Нет нужного количества")
+        if self.check_quantity(quantity):
+            self.quantity -= quantity
         else:
-            self.quantity = self.quantity - quantity
-        return self.quantity
+            if quantity > self.quantity:
+                raise ValueError("Нет нужного количества")
 
     def __hash__(self):
         return hash(self.name + self.description)
